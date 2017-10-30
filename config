@@ -1,0 +1,19 @@
+{
+	"agentid": "piWebAPIAgent",
+	"message": "piWebAPIAgent",
+	"server": {
+		"url": "",
+		"un": "",
+		"pw": ""
+	},
+	"publish_topic": "PIWebAPI",
+	"points": [{
+			"name": "",
+			"webId": ""
+		},
+		{
+			"name": "",
+			"webId": ""
+		}
+	]
+}
