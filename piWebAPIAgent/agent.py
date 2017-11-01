@@ -43,14 +43,14 @@ class piWebAPIAgent(Agent):
 
     @Core.receiver("onstart")
     def starting(self, sender, **kwargs):
-    self.publish_topic = self.default_config['publish_topic']
+        self.publish_topic = self.default_config['publish_topic']
         server = self.default_config['server']
         self.pi = PIWebAPI(server['url'], (server['un'], server['pw']))
         if self.pi:
             _log.info("Connected to OSIsoft PI Server: " + server['url'])
-    points = self.default_config['points']
-    for point in points:
-        self.to_monitor.append(self.pi.monitor_point(point['name'], point['webId']))
+        points = self.default_config['points']
+        for point in points:
+            self.to_monitor.append(self.pi.monitor_point(point['name'], point['webId']))
 
     @Core.periodic(settings.HEARTBEAT_PERIOD)
     def publish_heartbeat(self):
@@ -61,7 +61,7 @@ class piWebAPIAgent(Agent):
             for point in self.to_monitor:
                 point.read_latest_value()
                 self.vip.pubsub.publish(peer='pubsub',
-                                        topic=self.publish_topic + "\" + point.name,
+                                        topic=self.publish_topic + "\\" + point.name,
                                         message=point.get_serializable(),
                                         headers=headers)
         else:
