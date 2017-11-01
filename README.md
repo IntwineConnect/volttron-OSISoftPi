@@ -11,3 +11,12 @@ Each poll will result in the publication of the data to the pubsub bus. Below is
 
 Topic: 'PIWebAPI\Center_Campus.Olin_2 Power Total'
 Message: {'units': 'kW', 'timestamp': '2017-10-04Z14:49:27.455001', 'value': 33.0}
+
+To package:
+./scripts/core/pack_install.sh OSISoftPI-VOLTTRON-Agent/ OSISoftPI-VOLTTRON-Agent/config pie
+
+To start:
+volttron-ctl start --tag pie
+
+To remove:
+volttron-ctl remove --tag pie
