@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 2017, Intwine Connect, LLC.                            #
+# Copyright (c) 2017-2018, Intwine Connect, LLC.                       #
 # This file is licensed under the BSD-3-Clause                         #
 # See LICENSE for complete text                                        #
 ########################################################################
@@ -61,13 +61,13 @@ class piWebAPIAgent(Agent):
             for point in self.to_monitor:
                 point.read_latest_value()
                 self.vip.pubsub.publish(peer='pubsub',
-                                        topic=self.publish_topic + "\\" + point.name,
+                                        topic=self.publish_topic + "/" + point.name,
                                         message=point.get_serializable(),
                                         headers=headers)
         else:
             print "No Connection to a PI server..."
 
-        
+
 def main(argv=sys.argv):
     '''Main method called by the eggsecutable.'''
     try:
