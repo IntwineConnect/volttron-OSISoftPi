@@ -28,7 +28,7 @@ class PIWebAPI:
         return result.getcode() == 200
 
     def monitor_point(self, name, webId):
-        self.points[name] = PIWebAPIPoint(webId, self.server, self.auth)
+        self.points[name] = PIWebAPIPoint(webId, self.server, self.auth, name=name)
         self.points[name].read_latest_value()
         #print self.points[name].get_value()
         return self.points[name]
@@ -47,6 +47,7 @@ class PIWebAPIPoint:
     webId = ''
     units = ''
     name = ''
+    readable_name = None
     timestamp = datetime.datetime.utcfromtimestamp(0)
     value = None
     server = ''
@@ -54,10 +55,11 @@ class PIWebAPIPoint:
     path = ''
     descriptor = ''
 
-    def __init__(self, webId, server, auth):
+    def __init__(self, webId, server, auth, name=None):
         self.webId = webId
         self.server = server
         self.auth = auth
+        self.readable_name = name
         self.getPointInformation()
 
     def getPointInformation(self):
@@ -76,6 +78,9 @@ class PIWebAPIPoint:
         self.name = response['Name']
         self.descriptor = response['Descriptor']
 
+        if self.readable_name is None:
+            self.readable_name = self.name
+        
         return True
 
     def readValue(self):
