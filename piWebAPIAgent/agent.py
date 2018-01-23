@@ -61,7 +61,7 @@ class piWebAPIAgent(Agent):
             for point in self.to_monitor:
                 point.read_latest_value()
                 self.vip.pubsub.publish(peer='pubsub',
-                                        topic=self.publish_topic + "/" + point.name,
+                                        topic=self.publish_topic + "/" + point.readable_name,
                                         message=point.get_serializable(),
                                         headers=headers)
         else:
